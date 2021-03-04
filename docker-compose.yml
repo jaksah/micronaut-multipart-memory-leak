@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  app:
+    image: memory-leak-app:latest
+    ports:
+      - 8080:8080
+      - 1089:1089
+    mem_limit: 200m
+    environment:
+      JAVA_OPTS: -Dio.netty.leakDetection.level=advanced -Djava.rmi.server.hostname=0.0.0.0 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1089 -Dcom.sun.management.jmxremote.rmi.port=1089 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false
