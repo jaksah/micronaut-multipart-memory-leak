@@ -1,12 +1,8 @@
-## Micronaut 2.3.3 Documentation
+## Example app to reproduce multipart/form-data memory leak
+Steps to reproduce:
 
-- [User Guide](https://docs.micronaut.io/2.3.3/guide/index.html)
-- [API Reference](https://docs.micronaut.io/2.3.3/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/2.3.3/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
-
-## Feature http-client documentation
-
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
-
+1. Build the application `./gradlew build`
+1. Build the docker image `docker build -t memory-leak-app .`
+1. Run the application `docker-compose up -d`
+1. Run the following 1-5 times `for i in {1..1000}; do curl --location --request POST 'http://localhost:8080/image' --form 'file=@"src/main/resources/image.png"' &; done`
+1. Observe the logs `docker logs -f micronaut-multipart-memory-leak_app_1`
