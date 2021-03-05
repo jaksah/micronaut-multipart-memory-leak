@@ -1,3 +1,5 @@
 micronaut:
   application:
     name: micronautMultipartMemoryLeak
+  security:
+    authentication: bearer
